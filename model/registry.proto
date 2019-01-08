@@ -1,0 +1,186 @@
+syntax = "proto3";
+package model;
+
+// ServiceInformation
+message ServiceInformation {
+    // id
+    string id = 1;
+    // name
+    string name = 2;
+    // port
+    uint32 port = 3;
+    // address
+    string address = 4;
+    // tags
+    repeated string tags = 5;
+    // metadata
+    string metadata = 6;
+    // version
+    string version = 7;
+}
+
+// RegisterServiceRequest
+message RegisterServiceRequest {
+    // id
+    string id = 1;
+    // name
+    string name = 2;
+    // port
+    uint32 port = 3;
+    // address
+    string address = 4;
+    // tags
+    repeated string tags = 5;
+    // metadata
+    string metadata = 6;
+    // version
+    string version = 7;
+}
+
+// RegisterServiceResponse
+message RegisterServiceResponse {
+    // message
+    string message = 1;
+}
+
+// GetServiceRequest
+message GetServiceRequest {
+    // name
+    string name = 1;
+    // version
+    string version = 2;
+    // tag
+    string tag = 3;
+}
+
+// GetServiceResponse
+message GetServiceResponse {
+    // message
+    string message = 1;
+    // service
+    ServiceInformation service = 4;
+}
+
+// ListServicesRequest
+message ListServicesRequest {
+    // name
+    string name = 1;
+    // version
+    string version = 2;
+    // tag
+    string tag = 3;
+}
+
+// ListServicesResponse
+message ListServicesResponse {
+    // message
+    string message = 1;
+    // services
+    repeated ServiceInformation services = 4;
+}
+
+// DeregisterServiceRequest
+message DeregisterServiceRequest {
+    // id
+    string id = 1;
+}
+
+// DeregisterServiceResponse
+message DeregisterServiceResponse {
+    // message
+    string message = 1;
+}
+
+// PutValueRequest
+message PutValueRequest {
+    // key
+    string key = 1;
+    // value
+    string value = 2;
+}
+
+// PutValueResponse
+message PutValueResponse {
+    // message
+    string message = 1;
+}
+
+// GetValueRequest
+message GetValueRequest {
+    // key
+    string key = 1;
+}
+
+// GetValueResponse
+message GetValueResponse {
+    // message
+    string message = 1;
+    // value
+    string value = 2;
+}
+
+// ListKeysRequest
+message ListKeysRequest {
+    // prefix
+    string prefix = 1;
+}
+
+// ListKeysResponse
+message ListKeysResponse {
+    // message
+    string message = 1;
+    // keys
+    repeated string keys = 2;
+}
+
+// ListValuesRequest
+message ListValuesRequest {
+    // prefix
+    string prefix = 1;
+}
+
+// ListValuesResponse
+message ListValuesResponse {
+    // message
+    string message = 1;
+    // values
+    map<string, string> values = 2;
+}
+
+// DeleteValueRequest
+message DeleteValueRequest {
+    // key
+    string key = 1;
+}
+
+// DeleteValueResponse
+message DeleteValueResponse {
+    // message
+    string message = 1;
+}
+
+// Registry 是一個標準的中央服務庫並提供服務探索功能，服務能夠自主註冊至此中央服務庫來提供給其他服務呼叫與使用。
+// 同時，亦有健康檢查系統能夠確保註冊的服務都處於正常運作。
+service Registry {
+    // RegisterService 能將一個新的服務註冊到服務庫中，並且提供給其他服務使用。
+    rpc RegisterService(RegisterServiceRequest) returns (RegisterServiceResponse) {}
+    // GetService 可以從負載平衡中取得一個可用的服務。
+    rpc GetService(GetServiceRequest) returns (GetServiceResponse) {}
+    // ListServices 能夠列出所有可用（或是包含不可用）的服務。
+    rpc ListServices(ListServicesRequest) returns (ListServicesResponse) {}
+    // DeregisterService 會將一個指定的服務從服務庫中移除，讓中央服務庫不再追蹤該服務。
+    rpc DeregisterService(DeregisterServiceRequest) returns (DeregisterServiceResponse) {}
+
+    // PutValue 能夠將一個指定的鍵值組放入中央服務庫內共享給其他服務存取。
+    rpc PutValue(PutValueRequest) returns (PutValueResponse) {}
+    // GetValue 可以取得一個位於中央服務庫的鍵值組內容。
+    rpc GetValue(GetValueRequest) returns (GetValueResponse) {}
+    // ListKeys 能列出位於中央服務庫內所有（或是指定前輟）的鍵名。
+    rpc ListKeys(ListKeysRequest) returns (ListKeysResponse) {}
+    // ListValues 能列出位於中央服務庫內所有（或是指定前輟）的鍵值組資料。
+    rpc ListValues(ListValuesRequest) returns (ListValuesResponse) {}
+    // DeleteValue 會移除中央服務庫內的指定鍵值組資料。
+    rpc DeleteValue(DeleteValueRequest) returns (DeleteValueResponse) {}
+}
+
+

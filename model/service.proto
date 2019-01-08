@@ -1,0 +1,29 @@
+syntax = "proto3";
+package model;
+
+// HeartbeatRequest
+message HeartbeatRequest {
+
+}
+
+// HeartbeatResponse
+message HeartbeatResponse {
+    // message
+    string message = 1;
+    // cpuUsage
+    uint32 cpu_usage = 2;
+    // ramUsage
+    uint32 ram_usage = 3;
+    // diskUsage
+    uint32 disk_usage = 4;
+    //
+    uint32 connections = 5;
+    // isServing
+    bool is_serving = 6;
+}
+
+// Service
+service Service {
+    // Heartbeat
+    rpc Heartbeat(HeartbeatRequest) returns (HeartbeatResponse) {}
+}
