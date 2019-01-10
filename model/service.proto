@@ -16,7 +16,7 @@ message HeartbeatResponse {
     uint32 ram_usage = 3;
     // diskUsage
     uint32 disk_usage = 4;
-    //
+    // connections
     uint32 connections = 5;
     // isServing
     bool is_serving = 6;

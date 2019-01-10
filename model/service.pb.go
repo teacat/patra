@@ -64,7 +64,7 @@ type HeartbeatResponse struct {
 	RamUsage uint32 `protobuf:"varint,3,opt,name=ram_usage,json=ramUsage,proto3" json:"ram_usage,omitempty"`
 	// diskUsage
 	DiskUsage uint32 `protobuf:"varint,4,opt,name=disk_usage,json=diskUsage,proto3" json:"disk_usage,omitempty"`
-	//
+	// connections
 	Connections uint32 `protobuf:"varint,5,opt,name=connections,proto3" json:"connections,omitempty"`
 	// isServing
 	IsServing            bool     `protobuf:"varint,6,opt,name=is_serving,json=isServing,proto3" json:"is_serving,omitempty"`

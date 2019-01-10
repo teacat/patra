@@ -31,7 +31,7 @@ type Client struct {
 
 // Register
 func (c *Client) Register(config *RegisterConfig) error {
-
+	return nil
 }
 
 // Service
@@ -41,12 +41,12 @@ func (c *Client) Service(q *QueryOptions) (*ServiceInfo, error) {
 
 // Services
 func (c *Client) Services(q *QueryOptions) ([]*ServiceInfo, error) {
-
+	return nil, nil
 }
 
 // Deregister
 func (c *Client) Deregister(id string) error {
-
+	return nil
 }
 
 // KV
